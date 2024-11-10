@@ -1,0 +1,60 @@
+services:
+  nginx:
+    build:
+       dockerfile: ./dockerfilenginx
+       context: .
+    image: devemersonjuniorops/nginx
+    container_name: nginx
+    ports:
+      - "8000:80"
+    networks:
+      - redelocal
+    depends_on:
+      - "web1"
+      - "web2"
+      - "web3"
+  db:
+    build:
+      dockerfile: ./dockerfiledb
+      context: .
+    image: devemersonjuniorops/db
+    container_name: db
+    networks:
+      - redelocal
+    ports: 
+      - "3306"
+
+  web1:
+    build:
+       dockerfile: ./dockerfileweb
+       context: .
+    image: devemersonjuniorops/web
+    container_name: web1
+    ports:
+      - "80"
+    networks:
+      - redelocal
+    depends_on:
+      - "db"
+  web2: 
+    image: devemersonjuniorops/web
+    container_name: web2
+    ports:
+      - "80"
+    networks:
+      - redelocal
+    depends_on:
+      - "db"
+  web3: 
+    image: devemersonjuniorops/web
+    container_name: web3
+    ports:
+      - "80"
+    networks:
+      - redelocal 
+    depends_on:
+      - "db"  
+    
+networks:
+  redelocal:
+    driver: bridge
