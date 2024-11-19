@@ -29,7 +29,6 @@ pipeline {
                 }
             }
         }
-/*
         stage('Teste Aplicação') {
             steps {
                 // Testes automatizados da aplicação
@@ -38,7 +37,7 @@ pipeline {
 
                 // Realize os testes nos serviços em execução
                 // Exemplo de teste usando curl para verificar se o serviço web está respondendo
-                sh 'curl -I http://localhost'
+                sh 'curl -I http://localhost:8000'
 
                 sh 'docker-compose -f Docker-compose.yml down'
             }
@@ -48,6 +47,5 @@ pipeline {
                 input 'Deseja prosseguir com o Deploy e Push?'
             }
         }
-*/
  }
 }
